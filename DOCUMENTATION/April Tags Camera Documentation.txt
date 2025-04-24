@@ -1,0 +1,47 @@
+Features: 
+
+
+* Detects AprilTags from a live webcam feed
+* Draws bounding boxes and tag IDs in real time
+* Supports tag family tag36h11 (default)
+* (Sort of) supports detecting orientation of the AprilTag
+
+
+
+
+Preliminary setup:
+
+1. (If using VSCode) Install Visual Studio Build Tools
+   * Go to: https://visualstudio.microsoft.com/visual-cpp-build-tools
+
+   * Download and launch the installer.
+
+   * In the Workloads tab, check:
+
+   1. Desktop development with C++
+
+      * On the right panel under "Installation details", ensure the following are selected:
+
+         1. MSVC v143 (or newer)
+
+         2. Windows 10 or 11 SDK
+
+         3. C++ CMake tools for Windows
+2. (IMPORTANT) Make sure Python 3.11.9 is installed
+            * Go to: https://www.python.org/downloads/release/python-3119/ 
+
+
+3. Setup (in terminal)
+            * py -3.11 -m venv .venv
+            * .venv\Scripts\activate
+            * pip install --upgrade pip
+            * pip install pupil-apriltags opencv-python
+
+
+4. Run main.py
+5. In terminal, enter camera index (integer). Try 0 first, and if it doesn't work, try 1.
+6. Press “c” in the menu to start calibrating.
+            * Enter how many calibration images you would like it to take. 15 is good.
+            * When calibrating, move the camera around slowly while facing the checkerboard pattern until all pictures are taken, it should take the pictures automatically.
+7. When calibration is done, press “a” to start the april tag detection.
+8. Press “q” to quit any time.
