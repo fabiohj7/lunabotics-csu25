@@ -12,9 +12,11 @@ camera_index = 0  # Will hold calibrated [fx, fy, cx, cy]
 tag_size = 0.165  # meters (6.5 inches)
 calibration_file = "camera_params.json"
 
+
 def save_camera_params(params):
     with open(calibration_file, "w") as f:
         json.dump(params, f)
+
 
 def load_camera_params():
     global camera_params
@@ -25,10 +27,12 @@ def load_camera_params():
     else:
         print("[WARNING] No saved calibration found.")
 
+
 def capture_and_calibrate_auto():
     global camera_params
     try:
-        num_images = int(input("Enter number of calibration images to capture: ").strip())
+        num_images = int(
+            input("Enter number of calibration images to capture: ").strip())
     except ValueError:
         print("[ERROR] Invalid number. Using default of 15.")
         num_images = 15
@@ -44,7 +48,8 @@ def capture_and_calibrate_auto():
     cap = cv2.VideoCapture(camera_index)
     count = 0
     last_saved_time = time.time()
-    pattern_size = (10, 7)  # For an 8x11 square checkerboard (10x7 inner corners)
+    # For an 8x11 square checkerboard (10x7 inner corners)
+    pattern_size = (10, 7)
     square_size = 25.4  # mm (1 inch per square)
 
     print(f"[INFO] Capturing {num_images} calibration images...")
@@ -102,7 +107,7 @@ def capture_and_calibrate_auto():
         ret, corners = cv2.findChessboardCorners(gray, pattern_size, None)
         print(f"[INFO] {fname}: checkerboard detected? {ret}")
         if ret:
-            corners2 = cv2.cornerSubPix(gray, corners, (11,11), (-1,-1),
+            corners2 = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1),
                                         (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001))
             objpoints.append(objp)
             imgpoints.append(corners2)
@@ -111,7 +116,8 @@ def capture_and_calibrate_auto():
         print("[ERROR] Calibration failed: No checkerboards detected in saved images.")
         return
 
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
+    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
+        objpoints, imgpoints, gray.shape[::-1], None, None)
 
     if ret:
         fx, fy = mtx[0, 0], mtx[1, 1]
@@ -132,6 +138,7 @@ def capture_and_calibrate_auto():
     else:
         print("[ERROR] Calibration failed unexpectedly.")
 
+
 def detect_apriltags_live():
     global camera_params
     cap = cv2.VideoCapture(camera_index)
@@ -148,7 +155,8 @@ def detect_apriltags_live():
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         if camera_params:
-            tags = detector.detect(gray, estimate_tag_pose=True, tag_size=tag_size, camera_params=camera_params)
+            tags = detector.detect(
+                gray, estimate_tag_pose=True, tag_size=tag_size, camera_params=camera_params)
         else:
             tags = detector.detect(gray)
 
@@ -195,6 +203,7 @@ def detect_apriltags_live():
     cap.release()
     cv2.destroyAllWindows()
 
+
 def select_camera_index():
     global camera_index
     try:
@@ -202,6 +211,7 @@ def select_camera_index():
     except ValueError:
         print("[WARNING] Invalid input. Using default camera index 0.")
         camera_index = 0
+
 
 def main_menu_loop():
     print("[MENU] Menu: Press a key")
@@ -223,6 +233,7 @@ def main_menu_loop():
             break
         else:
             print("Invalid input. Press 'c', 'a', or 'q'.")
+
 
 if __name__ == "__main__":
     select_camera_index()
