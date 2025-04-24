@@ -118,14 +118,6 @@ def capture_and_calibrate_auto():
         cx, cy = mtx[0, 2], mtx[1, 2]
         camera_params = [fx, fy, cx, cy]
         save_camera_params(camera_params)
-        # Cleanup calibration images after saving calibration data
-        for img_file in glob.glob("calib_img_*.jpg"):
-            try:
-                os.remove(img_file)
-                print(f"[DELETE] Removed calibration image: {img_file}")
-            except Exception as e:
-                print(f"[WARNING] Could not delete {img_file}: {e}")
-
         print("[OK] Calibration successful.")
         print("Camera Matrix:")
         print(mtx)
@@ -163,6 +155,30 @@ def detect_apriltags_live():
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
             cv2.putText(frame, f"ID: {tag.tag_id}", (center[0] - 10, center[1] - 25),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+            if camera_params and hasattr(tag, 'pose_t') and tag.pose_t is not None:
+                try:
+                    distance = np.linalg.norm(tag.pose_t)
+                    cv2.putText(frame, f"Dist: {distance:.2f} m", (center[0] - 10, center[1] - 10),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 255), 2)
+
+                    # Calculate yaw and pitch from rotation matrix
+                    R = tag.pose_R
+                    yaw_rad = np.arctan2(R[1, 0], R[0, 0])
+                    pitch_rad = np.arctan2(-R[2, 0], np.sqrt(R[2, 1]**2 + R[2, 2]**2))
+                    yaw_deg = np.degrees(yaw_rad)
+                    pitch_deg = np.degrees(pitch_rad)
+                    cv2.putText(frame, f"Yaw: {yaw_deg:.1f} deg", (center[0] - 10, center[1] + 10),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2)
+                    cv2.putText(frame, f"Pitch: {pitch_deg:.1f} deg", (center[0] - 10, center[1] + 25),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2)
+                except Exception as e:
+                    print(f"[WARNING] Pose data error: {e}")
+                    cv2.putText(frame, "Dist: unavailable", (center[0] - 10, center[1] - 10),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+            else:
+                cv2.putText(frame, "Dist: unavailable", (center[0] - 10, center[1] - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
             if camera_params and hasattr(tag, 'pose_t') and tag.pose_t is not None:
                 try:
                     distance = np.linalg.norm(tag.pose_t)
