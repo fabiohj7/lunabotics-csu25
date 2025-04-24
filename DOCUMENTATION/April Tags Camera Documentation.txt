@@ -1,4 +1,4 @@
-﻿Features: 
+Features: 
 
 
 * Detects AprilTags from a live webcam feed
@@ -31,14 +31,17 @@ Preliminary setup:
             * Go to: https://www.python.org/downloads/release/python-3119/ 
 
 
-Setup (in terminal)
-            1. py -3.11 -m venv .venv
-            2. .venv\Scripts\activate
-            3. pip install --upgrade pip
-            4. pip install pupil-apriltags opencv-python
-Run main.py
-In terminal, enter camera index (integer). Try 0 first, and if it doesnt work, try 1.
-Press “c” in the menu to start calibrating.
-            * When calibrating, move the camera around while facing the checkerboard pattern
-When calibration is done, press “a” to start the april tag detection.
-Press “q” to quit any time.
+3. Setup (in terminal)
+            * py -3.11 -m venv .venv
+            * .venv\Scripts\activate
+            * pip install --upgrade pip
+            * pip install pupil-apriltags opencv-python
+
+
+4. Run main.py
+5. In terminal, enter camera index (integer). Try 0 first, and if it doesn't work, try 1.
+6. Press “c” in the menu to start calibrating.
+            * Enter how many calibration images you would like it to take. 15 is good.
+            * When calibrating, move the camera around slowly while facing the checkerboard pattern until all pictures are taken, it should take the pictures automatically.
+7. When calibration is done, press “a” to start the april tag detection.
+8. Press “q” to quit any time.
