@@ -1,0 +1,24 @@
+[4.766s] Invoking command in '/home/lunabotics/lunabotics_workspace/src/keyboard_to_motor': PYTHONPATH=/home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/keyboard_to_motor build --build-base /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build install --record /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/install.log --single-version-externally-managed install_data
+[6.122s] running egg_info
+[6.126s] writing ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/PKG-INFO
+[6.129s] writing dependency_links to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/dependency_links.txt
+[6.132s] writing entry points to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/entry_points.txt
+[6.133s] writing requirements to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/requires.txt
+[6.135s] writing top-level names to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/top_level.txt
+[6.148s] reading manifest file '../../build/keyboard_to_motor/keyboard_to_motor.egg-info/SOURCES.txt'
+[6.150s] writing manifest file '../../build/keyboard_to_motor/keyboard_to_motor.egg-info/SOURCES.txt'
+[6.152s] running build
+[6.154s] running build_py
+[6.156s] copying keyboard_to_motor/keyboard_to_motor.py -> /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build/lib/keyboard_to_motor
+[6.160s] running install
+[6.161s] running install_lib
+[6.166s] copying /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build/lib/keyboard_to_motor/keyboard_to_motor.py -> /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor
+[6.169s] byte-compiling /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor/keyboard_to_motor.py to keyboard_to_motor.cpython-310.pyc
+[6.171s] running install_data
+[6.172s] running install_egg_info
+[6.181s] removing '/home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor-0.0.0-py3.10.egg-info' (and everything under it)
+[6.183s] Copying ../../build/keyboard_to_motor/keyboard_to_motor.egg-info to /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor-0.0.0-py3.10.egg-info
+[6.190s] running install_scripts
+[6.295s] Installing keyboard_to_motor script to /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/keyboard_to_motor
+[6.298s] writing list of installed files to '/home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/install.log'
+[6.542s] Invoked command in '/home/lunabotics/lunabotics_workspace/src/keyboard_to_motor' returned '0': PYTHONPATH=/home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/keyboard_to_motor build --build-base /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build install --record /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/install.log --single-version-externally-managed install_data

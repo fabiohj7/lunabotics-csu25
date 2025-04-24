@@ -1,0 +1,11 @@
+For scribbling down things quickly, once you're done tidy it up in proper documentation.
+
+- Initializing rosdep for dependency management, required by usb_cam
+- usb_can didn't work locally, didn't need rosdep at all
+
+- Installed pip with apt, modified PATH in .bashrc for pip programs
+- Added the lunabotics user to dialout for port access
+
+- Created /etc/systemd/system/lunabotics.service and /usr/local/bin/lunabotics_ros_launch.sh
+
+- Installed Astra, did everything here https://github.com/orbbec/ros2_astra_camera?utm_source=chatgpt.com

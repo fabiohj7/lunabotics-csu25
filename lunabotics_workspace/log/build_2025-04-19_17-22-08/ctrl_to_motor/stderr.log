@@ -1,0 +1,5 @@
+  File "/home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages/ctrl_to_motor/ctrl_to_motor.py", line 23
+    self.i2c.write_byte(RIGHT_TRACK_SLAVE, round(((msg.axes[3] + 1) / 2) * 255 - 128)
+                       ^
+SyntaxError: '(' was never closed
+

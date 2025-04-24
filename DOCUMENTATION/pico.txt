@@ -1,0 +1,18 @@
+There are two main methods of uploading code to the Pi Pico
+
+1. Thonny
+Thonny is a pre-installed IDE on Ubuntu for Pi,
+it should automatically detect the board and connect to it,
+it's pretty clunky to use, so it's not recommended.
+
+2. ampy
+ampy is a command to upload code to the Pico.
+ampy --port /dev/ttyACM0 run <name of your script>
+Make sure you are in the same folder as the script when running this.
+If it doesn't work, the port may be wrong, use:
+ls /dev | grep tty
+And look for which path it may be under, it will stick out against the list/
+
+
+NOTE: If the Pico does not have MicroPython installed,
+see the pinned message in the #software channel of the Lunabotics discord for instructions.

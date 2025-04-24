@@ -1,0 +1,24 @@
+[3.056s] Invoking command in '/home/lunabotics/lunabotics_workspace/src/ctrl_to_motor': PYTHONPATH=/home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ctrl_to_motor build --build-base /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/build install --record /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/install.log --single-version-externally-managed install_data
+[4.283s] running egg_info
+[4.286s] writing ../../build/ctrl_to_motor/ctrl_to_motor.egg-info/PKG-INFO
+[4.287s] writing dependency_links to ../../build/ctrl_to_motor/ctrl_to_motor.egg-info/dependency_links.txt
+[4.288s] writing entry points to ../../build/ctrl_to_motor/ctrl_to_motor.egg-info/entry_points.txt
+[4.289s] writing requirements to ../../build/ctrl_to_motor/ctrl_to_motor.egg-info/requires.txt
+[4.290s] writing top-level names to ../../build/ctrl_to_motor/ctrl_to_motor.egg-info/top_level.txt
+[4.298s] reading manifest file '../../build/ctrl_to_motor/ctrl_to_motor.egg-info/SOURCES.txt'
+[4.302s] writing manifest file '../../build/ctrl_to_motor/ctrl_to_motor.egg-info/SOURCES.txt'
+[4.303s] running build
+[4.303s] running build_py
+[4.304s] copying ctrl_to_motor/ctrl_to_motor.py -> /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/build/lib/ctrl_to_motor
+[4.310s] running install
+[4.311s] running install_lib
+[4.315s] copying /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/build/lib/ctrl_to_motor/ctrl_to_motor.py -> /home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages/ctrl_to_motor
+[4.318s] byte-compiling /home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages/ctrl_to_motor/ctrl_to_motor.py to ctrl_to_motor.cpython-310.pyc
+[4.320s] running install_data
+[4.321s] running install_egg_info
+[4.329s] removing '/home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages/ctrl_to_motor-0.0.0-py3.10.egg-info' (and everything under it)
+[4.330s] Copying ../../build/ctrl_to_motor/ctrl_to_motor.egg-info to /home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages/ctrl_to_motor-0.0.0-py3.10.egg-info
+[4.336s] running install_scripts
+[4.422s] Installing ctrl_to_motor script to /home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/ctrl_to_motor
+[4.423s] writing list of installed files to '/home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/install.log'
+[4.562s] Invoked command in '/home/lunabotics/lunabotics_workspace/src/ctrl_to_motor' returned '0': PYTHONPATH=/home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics_workspace/install/ctrl_to_motor/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ctrl_to_motor build --build-base /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/build install --record /home/lunabotics/lunabotics_workspace/build/ctrl_to_motor/install.log --single-version-externally-managed install_data

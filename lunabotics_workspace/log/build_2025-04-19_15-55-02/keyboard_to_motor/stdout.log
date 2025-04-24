@@ -1,0 +1,22 @@
+running egg_info
+writing ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/PKG-INFO
+writing dependency_links to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/dependency_links.txt
+writing entry points to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/entry_points.txt
+writing requirements to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/requires.txt
+writing top-level names to ../../build/keyboard_to_motor/keyboard_to_motor.egg-info/top_level.txt
+reading manifest file '../../build/keyboard_to_motor/keyboard_to_motor.egg-info/SOURCES.txt'
+writing manifest file '../../build/keyboard_to_motor/keyboard_to_motor.egg-info/SOURCES.txt'
+running build
+running build_py
+copying keyboard_to_motor/keyboard_to_motor.py -> /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build/lib/keyboard_to_motor
+running install
+running install_lib
+copying /home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/build/lib/keyboard_to_motor/keyboard_to_motor.py -> /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor
+byte-compiling /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor/keyboard_to_motor.py to keyboard_to_motor.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/keyboard_to_motor/keyboard_to_motor.egg-info to /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/python3.10/site-packages/keyboard_to_motor-0.0.0-py3.10.egg-info
+running install_scripts
+Installing keyboard_to_motor script to /home/lunabotics/lunabotics_workspace/install/keyboard_to_motor/lib/keyboard_to_motor
+writing list of installed files to '/home/lunabotics/lunabotics_workspace/build/keyboard_to_motor/install.log'

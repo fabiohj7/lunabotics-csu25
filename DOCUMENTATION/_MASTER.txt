@@ -1,0 +1,15 @@
+This is the master file for all CSU Lunabotics documentation.
+Any docs on the system should have a listing here.
+
+ROS MODULES:
+rplidar - Lidar driver (~/lunabotics_workspace/src/rplidar_ros)
+usb_cam - Camera driver (installed with apt)
+(note: "ros2 run usb_cam usb_cam_node_exe image_raw:=image_rect" must be used for apriltag compatibility)
+rqt_image_view - Image viewer for camera (installed with apt)
+apriltag_ros - April Tag identifier (installed with apt) - Depends on usb_cam
+joy - Recieving input from gamepads (installed with apt)
+
+
+MISC:
+Pico - ~/DOCUMENTATION/pico.txt
+UART - ~/pico/README.MD
