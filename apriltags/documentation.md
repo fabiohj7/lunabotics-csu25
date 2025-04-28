@@ -1,8 +1,11 @@
+<h1> April Tag Detection and Calibration </h1>
+
 I reworked the original april tag code into a few different files for easier use.
+I also included an object oriented version where you can easily import a DistanceDetector into your code 
 
 -----------
 
-For starters, to use this code make a python virtual environment in version 3.11 and download the required modules (Described below) 
+<h2> Setting up your environment </h2>
 
 if you dont have python3.11, download it:
 brew install python@3.11 #for mac users
@@ -15,4 +18,12 @@ source ~/.pyenvs/apriltags/bin/activate
 <h3> Install the proper modules </h3>
 pip install opencv-python
 pip install pupil-apriltags
+
+------------
+
+<H2> Using the Code </h2>
+
+To calibrate for a specific camera, run
+`python calibrate_camera.py'
+
 
