@@ -24,7 +24,7 @@ def load_camera(camera_index):
     cap = cv2.VideoCapture(camera_index)
 
 
-def detect_on_call(camera_index):
+def detect_on_call():
     global camera_params
     global cap
 
@@ -55,15 +55,15 @@ def detect_on_call(camera_index):
         else:
             print("Distance unavailable")
 
-    cap.release()
     if id and distance:
         return ((id, distance))
 
 
-def detect_continuous(camera_index):
+def detect_continuous():
 
     global camera_params
-    cap = cv2.VideoCapture(camera_index)
+    global cap
+
     detector = Detector(families='tag36h11')
 
     print("[INFO] AprilTag detection started.")
@@ -109,9 +109,9 @@ def detect_continuous(camera_index):
 
 
 if __name__ == '__main__':
-    load_camera_params()
+    load_camera(0)
     # detect_continuous(0)
     # detect_apriltags(0)
     while True:
-        detect_on_call(0)
+        detect_on_call()
         time.sleep(1)
