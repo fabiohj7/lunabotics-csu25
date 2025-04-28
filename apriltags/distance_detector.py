@@ -13,7 +13,13 @@ cap = None
 class DistanceDetector():
 
     def __init__(self, camera_index, tag_size, param_file_path):
-        self.camera = cv2.VideoCapture(camera_index)
+        if camera_index == -1:
+            self.camera = None
+        else:
+            self.camera = cv2.VideoCapture(camera_index)
+            # give the camera a moment to turn on if an image is quickly taken
+            time.sleep(.05)
+
         self.tag_size = tag_size
         if os.path.exists(param_file_path):
             with open(param_file_path, 'r') as f:
@@ -21,20 +27,16 @@ class DistanceDetector():
         else:
             print(f'''UNABLE TO OPEN FILE AT PATH "{
                   param_file_path}" THIS DETECTOR WILL FAIL IF USED''')
-        # give the camera a moment to turn on if an image is quickly taken
-        time.sleep(.05)
 
-    def detect_tags(self, visualize=False):
+    def detect_tags(self, frame=None):
         tag_detector = Detector(families='tag36h11')
-        id, distance = (None, None)
 
         print("Attempting to detect an April Tag")
 
-        # Take an image
-        ret, frame = self.camera.read()
-        if not ret:
-            print("failed to capture image, aborting this attempt")
-            return
+        if frame is not None:
+            # Take an image
+            if (frame := self.take_picture()) is None:
+                return
 
         # convert to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -42,6 +44,11 @@ class DistanceDetector():
         # find all tags in the image
         tags = tag_detector.detect(
             gray, estimate_tag_pose=True, tag_size=self.tag_size, camera_params=self.camera_params)
+
+        return tags
+
+    def find_distance_to_tags(self, tags):
+        id, distance = (None, None)
 
         # iterate over all tags found and print their distances
         for tag in tags:
@@ -54,9 +61,6 @@ class DistanceDetector():
                     print(f"[WARNING] Pose data error: {e}")
             else:
                 print("Distance unavailable")
-
-        if visualize:
-            self.visualize_tags(tags, frame)
 
         if id and distance:
             return ((id, distance))
@@ -77,6 +81,15 @@ class DistanceDetector():
         cv2.imshow("AprilTag Detection (Live Menu)", frame)
         cv2.waitKey(1)
 
+    def take_picture(self):
+        if self.camera:
+            ret, frame = self.camera.read()
+            if not ret:
+                return
+            return frame
+        else:
+            print("no camera is attached to this DistanceDetector")
+
     def end_resources(self):
         cv2.destroyAllWindows()
         self.camera.release()
@@ -85,5 +98,9 @@ class DistanceDetector():
 if __name__ == '__main__':
     dd = DistanceDetector(0, .125, 'camera_params.json')
     while True:
-        dd.detect_tags(True)
+        frame = dd.take_picture()
+        tags = dd.detect_tags(frame)
+        print(dd.find_distance_to_tags(tags))
+        dd.visualize_tags(tags, frame)
+
         time.sleep(1)

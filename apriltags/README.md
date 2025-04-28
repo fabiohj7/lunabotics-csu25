@@ -19,8 +19,8 @@ if you dont have python3.11, download it:
 
 <h3> Install the proper modules </h3>
 
-    pip install opencv-python`
-    pip install pupil-apriltags`
+    pip install opencv-python
+    pip install pupil-apriltags
 
 ------------
 
@@ -33,14 +33,16 @@ and let the code take 15 pictures of your printed grid
 
 To include the code in a script, First, import the DistaceDetector class at the top of your file.
 Next, create an instance of a `DistanceDetector` object.
-Finally, to scan for an image, simply call the `detect_tags` method. 
+Finally, to scan for an image, simply call the `detect_tags` method. You will first need to get a frame either by using a camera attached to a distancedetector
+or from some other source  
+To find the distance between tags, call `find_distance_to_tags`   
 The final result will look something like this:  
 
     from distance_detector import DistanceDetector
-    
-    dd = DistanceDetector(0, .125, 'camera_params.json')
-    dd.detect_tags(visualize=True)
 
-
+    frame = dd.take_picture()
+    tags = dd.detect_tags(frame)
+    id, distance = dd.find_distance_to_tags(tags)
+    dd.visualize_tags(tags, frame) # optional to show what the camera sees
 
 
