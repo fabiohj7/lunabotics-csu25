@@ -21,6 +21,8 @@ class DistanceDetector():
         else:
             print(f'''UNABLE TO OPEN FILE AT PATH "{
                   param_file_path}" THIS DETECTOR WILL FAIL IF USED''')
+        # give the camera a moment to turn on if an image is quickly taken
+        time.sleep(.05)
 
     def detect_tags(self, visualize=False):
         tag_detector = Detector(families='tag36h11')
