@@ -37,10 +37,10 @@ Finally, to scan for an image, simply call the `detect_tags` method.
 The final result will look something like this:  
 
     from distance_detector import DistanceDetector
-    
-    dd = DistanceDetector(0, .125, 'camera_params.json')
-    dd.detect_tags(visualize=True)
 
-
+    frame = dd.take_picture()
+    tags = dd.detect_tags(frame)
+    id, distance = dd.find_distance_to_tags(tags)
+    dd.visualize_tags(tags, frame) # optional to show what the camera sees
 
 
