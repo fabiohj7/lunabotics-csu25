@@ -7,7 +7,7 @@ I also included an object oriented version where you can easily import a Distanc
 
 <h2> Setting up your environment </h2>
 
-if you dont have python3.11, download it:\
+if you dont have python3.11, download it:
 
     brew install python@3.11 #for mac users
 
