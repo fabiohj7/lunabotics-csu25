@@ -19,8 +19,8 @@ if you dont have python3.11, download it:
 
 <h3> Install the proper modules </h3>
 
-    pip install opencv-python`
-    pip install pupil-apriltags`
+    pip install opencv-python
+    pip install pupil-apriltags
 
 ------------
 
