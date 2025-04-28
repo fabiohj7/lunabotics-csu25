@@ -33,7 +33,7 @@ class DistanceDetector():
 
         print("Attempting to detect an April Tag")
 
-        if frame is not None:
+        if frame is None:
             # Take an image
             if (frame := self.take_picture()) is None:
                 return

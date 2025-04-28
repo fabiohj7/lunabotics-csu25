@@ -1,3 +1,0 @@
-[console_scripts]
-keyboard_to_motor = keyboard_to_motor.keyboard_to_motor:main
-

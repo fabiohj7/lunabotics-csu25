@@ -8,4 +8,5 @@ For scribbling down things quickly, once you're done tidy it up in proper docume
 
 - Created /etc/systemd/system/lunabotics.service and /usr/local/bin/lunabotics_ros_launch.sh
 
-- Installed Astra, did everything here https://github.com/orbbec/ros2_astra_camera?utm_source=chatgpt.com
+- Installed Astra, did everything here https://github.com/orbbec/ros2_astra_camera
+- Also had to sudo apt install nlohmann-json3-dev

@@ -1,2 +1,5 @@
 apriltags/camera_params.json
 apriltags/__pycache__/*
+lunabotics_workspace/log/*
+lunabotics_workspace/build/*
+lunabotics_workspace/install/*
