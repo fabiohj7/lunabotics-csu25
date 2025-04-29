@@ -122,4 +122,4 @@ def auto_calibrate(camera_index):
 
 
 if __name__ == "__main__":
-    auto_calibrate(0)
+    auto_calibrate(1)
