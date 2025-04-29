@@ -1,0 +1,11 @@
+string tag_family
+uint32 tag_id
+uint8 hamming
+float64 decision_margin
+float64[] homography
+float64[] center
+float64[] corners
+float64[] pose_r
+float64[] pose_t
+float64 pose_err
+float64 distance
