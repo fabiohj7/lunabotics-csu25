@@ -4,10 +4,12 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
-#from distance_detector import DistanceDetector
+# from distance_detector import DistanceDetector
 from pupil_apriltags import Detector, Detection
 from crunch_tags_msgs.msg import AprilTag, AprilTags
-CAMERA_PARAMS = [321.57651609166743, 441.58510187937816, 244.93956987378624, 201.58593543666143]
+CAMERA_PARAMS = [321.57651609166743, 441.58510187937816,
+                 244.93956987378624, 201.58593543666143]
+
 
 class CrunchTags(Node):
     def __init__(self):
@@ -16,19 +18,22 @@ class CrunchTags(Node):
         self.get_logger().info('Listening to /image_raw topic for camera stream...')
         self.get_logger().info('Camera calibration DOES NOT happen automatically!')
         self.get_logger().info('If calibration is needed, run apriltags/calibrate_camera.py and copy the data in camera_params.json to the array at the top of this code.')
-        self.get_logger().info('AprilTag square sizes are hardcoded to 25mm, change this in code if needed.')
-        #self.april_publish = self.create_publisher(Detection, '/apriltags', 10)
+        self.get_logger().info(
+            'AprilTag square sizes are hardcoded to 25mm, change this in code if needed.')
+        # self.april_publish = self.create_publisher(Detection, '/apriltags', 10)
         self.cv_bridge = CvBridge()
-        self.tag_detector = Detector(families='tag36h11')  
+        self.tag_detector = Detector(families='tag36h11')
         self.tag_publisher = self.create_publisher(AprilTags, '/apriltags', 10)
         self.visualize = True
         if self.visualize:
-            self.visualizer = self.create_publisher(Image, '/apriltag_visualization', 10)
+            self.visualizer = self.create_publisher(
+                Image, '/apriltag_visualization', 10)
             self.get_logger().info('Visualizing the AprilTags on /apriltag_visualization')
 
     def cam_callback(self, msg):
         cv_image = self.cv_bridge.imgmsg_to_cv2(msg, 'mono8')
-        tags = self.tag_detector.detect(cv_image, estimate_tag_pose=True, tag_size=0.125, camera_params=CAMERA_PARAMS)
+        tags = self.tag_detector.detect(
+            cv_image, estimate_tag_pose=True, tag_size=0.125, camera_params=CAMERA_PARAMS)
         # for tag in tags:
         #     self.april_publish.publish(tag)
         aprils = AprilTags()
@@ -62,12 +67,14 @@ class CrunchTags(Node):
             publish = self.cv_bridge.cv2_to_imgmsg(cv_image)
             self.visualizer.publish(publish)
 
+
 def main(args=None):
     rclpy.init(args=args)
     node = CrunchTags()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
