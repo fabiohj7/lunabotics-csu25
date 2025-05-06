@@ -1,0 +1,3 @@
+[console_scripts]
+manual_drive = manual_drive.manual_drive:main
+

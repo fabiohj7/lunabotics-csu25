@@ -1,0 +1,24 @@
+[3.808s] Invoking command in '/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive': PYTHONPATH=/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/manual_drive build --build-base /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/build install --record /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/install.log --single-version-externally-managed install_data
+[5.278s] running egg_info
+[5.283s] writing build/manual_drive/manual_drive.egg-info/PKG-INFO
+[5.287s] writing dependency_links to build/manual_drive/manual_drive.egg-info/dependency_links.txt
+[5.287s] writing entry points to build/manual_drive/manual_drive.egg-info/entry_points.txt
+[5.288s] writing requirements to build/manual_drive/manual_drive.egg-info/requires.txt
+[5.290s] writing top-level names to build/manual_drive/manual_drive.egg-info/top_level.txt
+[5.300s] reading manifest file 'build/manual_drive/manual_drive.egg-info/SOURCES.txt'
+[5.304s] writing manifest file 'build/manual_drive/manual_drive.egg-info/SOURCES.txt'
+[5.305s] running build
+[5.306s] running build_py
+[5.307s] copying manual_drive/manual_drive.py -> /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/build/lib/manual_drive
+[5.309s] running install
+[5.310s] running install_lib
+[5.313s] copying /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/build/lib/manual_drive/manual_drive.py -> /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages/manual_drive
+[5.317s] byte-compiling /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages/manual_drive/manual_drive.py to manual_drive.cpython-310.pyc
+[5.321s] running install_data
+[5.322s] running install_egg_info
+[5.331s] removing '/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages/manual_drive-0.0.0-py3.10.egg-info' (and everything under it)
+[5.332s] Copying build/manual_drive/manual_drive.egg-info to /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages/manual_drive-0.0.0-py3.10.egg-info
+[5.339s] running install_scripts
+[5.437s] Installing manual_drive script to /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/manual_drive
+[5.439s] writing list of installed files to '/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/install.log'
+[5.607s] Invoked command in '/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive' returned '0': PYTHONPATH=/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/install/manual_drive/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/manual_drive build --build-base /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/build install --record /home/lunabotics/lunabotics-csu25/lunabotics_workspace/src/manual_drive/build/manual_drive/install.log --single-version-externally-managed install_data
