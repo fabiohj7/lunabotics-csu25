@@ -14,8 +14,8 @@ CAMERA_PARAMS = [321.57651609166743, 441.58510187937816,
 class CrunchTags(Node):
     def __init__(self):
         super().__init__('crunch_tags')
-        self.create_subscription(Image, '/image_raw', self.cam_callback, 10)
-        self.get_logger().info('Listening to /image_raw topic for camera stream...')
+        self.create_subscription(Image, '/camera_node/image_raw', self.cam_callback, 10)
+        self.get_logger().info('Listening to camera stream...')
         self.get_logger().info('Camera calibration DOES NOT happen automatically!')
         self.get_logger().info('If calibration is needed, run apriltags/calibrate_camera.py and copy the data in camera_params.json to the array at the top of this code.')
         self.get_logger().info(

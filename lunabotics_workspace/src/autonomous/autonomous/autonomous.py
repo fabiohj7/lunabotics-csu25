@@ -22,25 +22,28 @@ class Autonomous(Node):
         self.get_logger().info('Listening to network for commands')
         self.driver = self.create_publisher(RoboCommand, "/robo_driver", 10)
         self.get_logger().info('Connected to Robo Driver')
-        self.create_subscription(AprilTags, '/apriltags', self.april_callback)
+        self.create_subscription(AprilTags, '/apriltags', self.april_callback, 10)
+        self.create_timer(0.25, self.auto_loop)
         self.enabled = False
         self.excavate_distance = 10
         self.deposit_distance = 3
         # 0 = drop blade, 1 = move to deposit, 2 = lift blade, 3 = reverse into excavate
         self.auto_state = 0
+        self.april_dist = 0
 
     def april_callback(self, msg: AprilTags):
-        if len(msg.apriltags) < 1 or not self.enabled:
-            return
-        april = msg.apriltags[0]
+        if len(msg.apriltags) > 0:
+            april = msg.apriltags[0]
+    
+    def auto_loop(self):
         match self.auto_state:
             case 0:
                 # drop the blade
                 pass
             case 1:
-                if april.distance > self.deposit_distance:
+                if self.april_dist > self.deposit_distance:
                     publish = RoboCommand()
-                    publish.left_track_speed, publish.right_track_speed = 1
+                    publish.left_track_speed, publish.right_track_speed = 0.25
                     publish.left_track_forward, publish.right_track_forward = True
                     self.driver.publish(publish)
                 else:
@@ -49,9 +52,9 @@ class Autonomous(Node):
                 # lift the blade
                 pass
             case 3:
-                if april.distance < self.excavate_distance:
+                if self.april_dist < self.excavate_distance:
                     publish = RoboCommand()
-                    publish.left_track_speed, publish.right_track_speed = 1
+                    publish.left_track_speed, publish.right_track_speed = 0.25
                     publish.left_track_forward, publish.right_track_forward = False
                     self.driver.publish(publish)
                 else:
@@ -60,21 +63,16 @@ class Autonomous(Node):
 
     def net_callback(self, msg):
         nums = [int.from_bytes(x, 'little') for x in msg.data]
-        speed1 = abs(nums[0] - 62) / 63
-        speed2 = abs(nums[1] - 62) / 63
-        speed1 = speed1 if speed1 > 0.25 else 0
-        speed2 = speed2 if speed2 > 0.25 else 0
-        
-        publish = RoboCommand()
-        publish.left_track_speed = speed1
-        publish.right_track_speed = speed2
-        publish.left_track_forward = nums[0]>62
-        publish.right_track_forward = nums[1]>62
-
-        self.driver.publish(publish)
-
-        self.get_logger().info(str(nums) + ' ' + str([speed1, speed2]) + ' ' + str([publish.left_track_forward, publish.right_track_forward]))
-
+        if len(nums) == 1:
+            match nums[0]:
+                case 0x20:
+                    self.enabled = False
+                case 0x40:
+                    self.enabled = True
+                case 0x60:
+                    self.deposit_distance = self.april_dist
+                case 0x80:
+                    self.excavate_distance = self.april_dist
 
 def main(args=None):
     rclpy.init(args=args)

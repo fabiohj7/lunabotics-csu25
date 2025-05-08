@@ -19,23 +19,35 @@ class ManualControl(Node):
         self.get_logger().info('Listening to network for commands')
         self.driver = self.create_publisher(RoboCommand, "/robo_driver", 10)
         self.get_logger().info('Connected to Robo Driver')
+        self.enabled = True
 
     def net_callback(self, msg):
         nums = [int.from_bytes(x, 'little') for x in msg.data]
-        speed1 = abs(nums[0] - 62) / 63
-        speed2 = abs(nums[1] - 62) / 63
-        speed1 = speed1 if speed1 > 0.25 else 0
-        speed2 = speed2 if speed2 > 0.25 else 0
-        
-        publish = RoboCommand()
-        publish.left_track_speed = speed1
-        publish.right_track_speed = speed2
-        publish.left_track_forward = nums[0]>62
-        publish.right_track_forward = nums[1]>62
+        if len(nums) == 1:
+            match nums[0]:
+                case 0x20:
+                    self.enabled = True
+                case 0x40:
+                    self.enabled = False
+        elif self.enabled:
+            speed1 = abs(nums[0] - 62) / 63
+            speed2 = abs(nums[1] - 62) / 63
+            speed1 = speed1 if speed1 > 0.25 else 0
+            speed2 = speed2 if speed2 > 0.25 else 0
+            
+            # Jarod said "full speed is too fast wah wah wah"
+            speed1 /= 2
+            speed2 /= 2
 
-        self.driver.publish(publish)
+            publish = RoboCommand()
+            publish.left_track_speed = speed1
+            publish.right_track_speed = speed2
+            publish.left_track_forward = nums[0]>62
+            publish.right_track_forward = nums[1]>62
 
-        self.get_logger().info(str(nums) + ' ' + str([speed1, speed2]) + ' ' + str([publish.left_track_forward, publish.right_track_forward]))
+            self.driver.publish(publish)
+
+            self.get_logger().info(str(nums) + ' ' + str([speed1, speed2]) + ' ' + str([publish.left_track_forward, publish.right_track_forward]))
 
 
 def main(args=None):

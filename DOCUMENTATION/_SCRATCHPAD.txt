@@ -10,3 +10,5 @@ For scribbling down things quickly, once you're done tidy it up in proper docume
 
 - Installed Astra, did everything here https://github.com/orbbec/ros2_astra_camera
 - Also had to sudo apt install nlohmann-json3-dev
+
+- Some dumb fucking bullshit service called motion hogs any camera plugged in after like 2 seconds and is for some reason only fucking visible to root so you have to run `sudo lsof /dev/video0` to even see it this shit took me several hours to debug who the fuck is going to turn their Pi into a security camera why does this shit exist. It is now uninstalled from the Pi.

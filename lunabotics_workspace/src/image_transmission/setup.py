@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'autonomous'
+package_name = 'image_transmission'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'autonomous = autonomous.autonomous:main'
+            'image_transmission = image_transmission.image_transmission:main'
         ],
     },
 )
