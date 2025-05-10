@@ -5,7 +5,8 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
 
-import socket
+
+import struct
 
 class ImageTransmission(Node):
     def __init__(self):
@@ -26,8 +27,9 @@ class ImageTransmission(Node):
         result, compressed = cv2.imencode(".jpg", downscaled, [int(cv2.IMWRITE_JPEG_QUALITY), 10])
         #self.debug.publish(self.bridge.cv2_to_imgmsg(downscaled))
         data = compressed.tobytes()
+        header = struct.pack('>I', len(data))
         publish = ByteMultiArray()
-        publish.data = [bytes([x]) for x in data]
+        publish.data = [bytes([x]) for x in header] + [bytes([x]) for x in data]
         self.network.publish(publish)
         
     def cam_callback(self, msg: Image):

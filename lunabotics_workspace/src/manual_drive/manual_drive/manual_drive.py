@@ -23,6 +23,7 @@ class ManualControl(Node):
 
     def net_callback(self, msg):
         nums = [int.from_bytes(x, 'little') for x in msg.data]
+
         if len(nums) == 1:
             match nums[0]:
                 case 0x20:
@@ -34,7 +35,7 @@ class ManualControl(Node):
             speed2 = abs(nums[1] - 62) / 63
             speed1 = speed1 if speed1 > 0.25 else 0
             speed2 = speed2 if speed2 > 0.25 else 0
-            
+            nums[2] = msg.data[2:3].decode('ascii')
             # Jarod said "full speed is too fast wah wah wah"
             speed1 /= 2
             speed2 /= 2
@@ -44,6 +45,7 @@ class ManualControl(Node):
             publish.right_track_speed = speed2
             publish.left_track_forward = nums[0]>62
             publish.right_track_forward = nums[1]>62
+	        publish.blade_speed = nums[2]
 
             self.driver.publish(publish)
 
