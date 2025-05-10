@@ -3,5 +3,5 @@ float64 left_track_speed
 float64 right_track_speed
 bool left_track_forward
 bool right_track_forward
-float64 blade_speed
+uint8 blade_speed
 bool blade_up

@@ -9,14 +9,14 @@ from robo_driver_msgs.msg import RoboCommand
 # GPIO numberings, not real pin numberings
 
 # Drive Motor GPIO
-motor_l_n = 5
 motor_l_p = 6
+motor_l_n = 5
 motor_r_p = 13
 motor_r_n = 19
 
 # Linear Actuator GPIO
 actuator_pul = 17
-actuator_dir = 18
+actuator_dir = 27
 
 # Other parameters
 pulse_duration = 500  # micro seconds (uS)
@@ -34,20 +34,22 @@ class RoboDriver(Node):
         GPIO.setup(motor_r_p,GPIO.OUT)
         GPIO.setup(motor_l_n,GPIO.OUT)
         GPIO.setup(motor_r_n,GPIO.OUT)
+        GPIO.setup(actuator_pul,GPIO.OUT)
+        GPIO.setup(actuator_dir,GPIO.OUT)
 
-	def step_actuator_motor(pulse_pin: int) -> None:
-		global last_step_time, step_current_state
-		now = time.time()
-		elapsed_uS = (now - last_step_time) * 1000000
+    def step_actuator_motor(self, pulse_pin: int) -> None:
+        global last_step_time, step_current_state
+        now = time.time()
+        elapsed_uS = (now - last_step_time) * 1000000
 
-		if elapsed_uS >= pulse_duration:
-			step_current_state = not step_current_state
+        if elapsed_uS >= pulse_duration:
+            step_current_state = not step_current_state
 
-			GPIO.output(pulse_pin, GPIO.HIGH)
+            GPIO.output(pulse_pin, GPIO.HIGH)
 
-			last_step_time = now
-		else
-			GPIO.output(pulse_pin, GPIO.LOW)
+            last_step_time = now
+        else:
+            GPIO.output(pulse_pin, GPIO.LOW)
 
 
     def driver_callback(self, msg):
@@ -56,17 +58,15 @@ class RoboDriver(Node):
         self.mcp.channel_c.normalized_value = msg.right_track_speed
         self.mcp.channel_d.normalized_value = msg.right_track_speed
         
-	# Drive Motor Outputs
+        # Drive Motor Outputs
         GPIO.output(motor_l_p, GPIO.HIGH if msg.left_track_forward else GPIO.LOW)
         GPIO.output(motor_r_p, GPIO.HIGH if msg.right_track_forward else GPIO.LOW)
         GPIO.output(motor_l_n, GPIO.LOW if msg.left_track_forward else GPIO.HIGH)
         GPIO.output(motor_r_n, GPIO.LOW if msg.right_track_forward else GPIO.HIGH)
 
-	    # Actuator Outputs
-	    GPIO.output(actuator_dir, GPIO.HIGH if msg.blade_speed == 2 else GPIO.LOW)
-	    GPIO.output(actuator_dir, GPIO.LOW if msg.blade_speed == 0)
-	    GPIO.output(actuator_dir, GPIO.HIGH if msg.blade_speed == 1) # Setting "neutral" direction 2 up in case of misfire to prevent crashing into ground
-	    self.step_actuator_motor(actuator_pul)
+        # Actuator Outputs
+        GPIO.output(actuator_dir, GPIO.HIGH if msg.blade_speed == 2 or msg.blade_speed == 1 else GPIO.LOW)
+        self.step_actuator_motor(actuator_pul)
 
 def main(args=None):
     rclpy.init(args=args)
