@@ -33,12 +33,12 @@ class ManualControl(Node):
         elif self.enabled:
             speed1 = abs(nums[0] - 62) / 63
             speed2 = abs(nums[1] - 62) / 63
-            speed1 = speed1 if speed1 > 0.25 else 0
-            speed2 = speed2 if speed2 > 0.25 else 0
+            speed1 = speed1 if speed1 > 0.25 else 0.0
+            speed2 = speed2 if speed2 > 0.25 else 0.0
             nums[2] = int(msg.data[2].decode('ascii'))
             # Jarod said "full speed is too fast wah wah wah"
-            speed1 /= 2
-            speed2 /= 2
+            #speed1 /= 2
+            #speed2 /= 2
 
             publish = RoboCommand()
             publish.left_track_speed = speed1

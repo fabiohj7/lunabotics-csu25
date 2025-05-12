@@ -15,8 +15,8 @@ motor_r_p = 13
 motor_r_n = 19
 
 # Linear Actuator GPIO
-actuator_pul = 17
-actuator_dir = 27
+actuator_pul = 22
+actuator_dir = 23
 
 # Other parameters
 pulse_duration = 500  # micro seconds (uS)
@@ -36,21 +36,9 @@ class RoboDriver(Node):
         GPIO.setup(motor_r_n,GPIO.OUT)
         GPIO.setup(actuator_pul,GPIO.OUT)
         GPIO.setup(actuator_dir,GPIO.OUT)
-
-    def step_actuator_motor(self, pulse_pin: int) -> None:
-        global last_step_time, step_current_state
-        now = time.time()
-        elapsed_uS = (now - last_step_time) * 1000000
-
-        if elapsed_uS >= pulse_duration:
-            step_current_state = not step_current_state
-
-            GPIO.output(pulse_pin, GPIO.HIGH)
-
-            last_step_time = now
-        else:
-            GPIO.output(pulse_pin, GPIO.LOW)
-
+        # Zero out track motors
+        self.get_logger().info("AAAA")
+        self.mcp.channel_a.normalized_value, self.mcp.channel_b.normalized_value, self.mcp.channel_c.normalized_value, self.mcp.channel_d.normalized_value = (0, 0, 0, 0)
 
     def driver_callback(self, msg):
         self.mcp.channel_a.normalized_value = msg.left_track_speed
@@ -66,7 +54,7 @@ class RoboDriver(Node):
 
         # Actuator Outputs
         GPIO.output(actuator_dir, GPIO.HIGH if msg.blade_speed == 2 or msg.blade_speed == 1 else GPIO.LOW)
-        self.step_actuator_motor(actuator_pul)
+        GPIO.output(actuator_pul, GPIO.HIGH if msg.blade_speed == 0 or msg.blade_speed == 2 else GPIO.LOW)
 
 def main(args=None):
     rclpy.init(args=args)

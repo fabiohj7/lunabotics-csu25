@@ -4,6 +4,7 @@ from std_msgs.msg import ByteMultiArray
 import board
 import adafruit_mcp4728
 import RPi.GPIO as GPIO
+import time
 from robo_driver_msgs.msg import RoboCommand
 from crunch_tags_msgs.msg import AprilTags
 
@@ -25,37 +26,56 @@ class Autonomous(Node):
         self.create_subscription(AprilTags, '/apriltags', self.april_callback, 10)
         self.create_timer(0.25, self.auto_loop)
         self.enabled = False
-        self.excavate_distance = 10
-        self.deposit_distance = 3
+        self.excavate_distance = 2
+        self.deposit_distance = 1
         # 0 = drop blade, 1 = move to deposit, 2 = lift blade, 3 = reverse into excavate
         self.auto_state = 0
         self.april_dist = 0
 
     def april_callback(self, msg: AprilTags):
         if len(msg.apriltags) > 0:
-            april = msg.apriltags[0]
+            self.april_dist = msg.apriltags[0].distance
     
     def auto_loop(self):
+        if not self.enabled:
+            return
+        self.get_logger().info("Auto State: " + str(self.auto_state)) 
         match self.auto_state:
             case 0:
                 # drop the blade
+                publish = RoboCommand()
+                publish.blade_speed = 0
+                self.driver.publish(publish)
+                # Give time for blade
+                self.auto_state = 1
+                time.sleep(2)
+                self.auto_state = 2
                 pass
-            case 1:
+            case 2:
                 if self.april_dist > self.deposit_distance:
                     publish = RoboCommand()
-                    publish.left_track_speed, publish.right_track_speed = 0.25
-                    publish.left_track_forward, publish.right_track_forward = True
+                    publish.left_track_speed, publish.right_track_speed = (0.25, 0.25)
+                    publish.left_track_forward, publish.right_track_forward = (True, True)
+                    publish.blade_speed = 1
                     self.driver.publish(publish)
                 else:
-                    self.auto_state = 2
-            case 2:
-                # lift the blade
-                pass
+                    self.auto_state = 3
             case 3:
+                # lift the blade
+                publish = RoboCommand()
+                publish.blade_speed = 2
+                self.driver.publish(publish)
+                # Give time for the blade
+                self.auto_state = 4
+                time.sleep(2)
+                self.auto_state = 5
+                pass
+            case 5:
                 if self.april_dist < self.excavate_distance:
                     publish = RoboCommand()
-                    publish.left_track_speed, publish.right_track_speed = 0.25
-                    publish.left_track_forward, publish.right_track_forward = False
+                    publish.left_track_speed, publish.right_track_speed = (0.25, 0.25)
+                    publish.left_track_forward, publish.right_track_forward = (False, False)
+                    publish.blade_speed = 1
                     self.driver.publish(publish)
                 else:
                     self.auto_state = 0
